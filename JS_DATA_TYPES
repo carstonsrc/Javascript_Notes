@@ -1,0 +1,291 @@
+JS DATA TYPES
+1. number
+2. string
+3. boolean -> true or false, 1 or 0
+4. undefined -> the value has not been defined yet
+5. null -> a placeholder that has no data
+6. symbol -> Symbol(); this creates a unique types
+7. object -> has properties and values
+8. BigInt //ES2020 
+
+------------------------------------------------------------------------------------------------------
+
+JS COMPARISONS
+===
+!==
+>=
+<=
+>
+< 
+
+== is type coercion. Therefore, JS will compare equality after doing type conversions.
+=== does not do type coercion. Only returns true if both values are identical.
+
+------------------------------------------------------------------------------------------------------
+
+JS VARIABLES
+var = global scope, function scope, can be reassigned. No block scope.
+
+ES6
+let = function scoped, block scoped, can be updated but not redeclared, hoisted to top
+const = function scoped, block scoped, maintains constant value
+
+------------------------------------------------------------------------------------------------------
+
+JS CONDITIONALS
+if 
+else
+else if
+ternary -> condition ? expression1 : expression2;
+switch -> switch(argument) {
+			case 1:
+			break;
+
+			case 2:
+			break;
+
+			default: 
+}
+
+------------------------------------------------------------------------------------------------------
+
+JS LOGICAL OPERATORS
+&& 
+||
+!
+
+------------------------------------------------------------------------------------------------------
+
+JS FUNCTIONS
+	EXPRESSION -> var a = function name() 
+	DECLARATION -> function name() 
+
+	Parameters -> the names listed in the function definition
+	Arguments -> the real values passed to the function
+
+
+	- a function inside an object is called a method. or a function preceeded with a .
+
+		function -> function newFunction() {
+		}
+
+		method -> var object = {
+			objMethod : function() {
+			}
+		}
+
+ARROW FUNCTIONS
+	- introduced in ES6
+	- shorter syntax for declaring functions
+	- only can be used as function expressions
+
+	let add = (a,b) => a + b;
+
+CURRYING
+	- transform a function that takes multiple arguments into a function that takes the arguments one at a time 
+
+	let multiply = (a,b) => a * b;
+	let currying = (a) => (b) => a * b;
+	let multiplyBy5 = currying(5) 
+	multiply(10);
+	//output is 5 * 10 = 50
+
+COMPOSE
+	- takes multiple functions and returns a single output
+
+		const compose = (f, g) => (a) => f(g(a));
+		const add1 = (num) => num + 1;
+		const add5 = (num) => num + 5;
+		compose(add1, add5)(10)
+
+------------------------------------------------------------------------------------------------------
+
+SCOPE
+	- global scope
+	- local scope/function scope
+	- block scope
+
+CLOSURES
+	- ability for a function to remember variables and functions declared in outer scope
+	- funciton ran, funciton executed. It then will remember the references from the parent function and share with child function to use
+	- child has access to parent but parent does not have access to child
+
+		function randomFunc(){
+		  var obj1 = {name:"Vivian", age:45};
+
+		  return function(){
+		    console.log(obj1.name + " is "+ "awesome"); // Has access to obj1 even when the randomFunc function is executed
+		  }
+		}
+
+		var initializeClosure = randomFunc(); // Returns a function
+		initializeClosure(); 
+
+HOISTING	
+	- memory is allocated pre runtime for variables and functions
+	- var is partially hoisted (values may be undefined)
+	- let and const are not hoisted at all
+	- functions are fully hoisted
+
+IIFE -> immediately invoked function expression
+	- a function expression that creates own local scope. 
+		(function(){})();
+
+THIS
+	- object that the funtion is a property of
+
+call() apply() 
+	- allows you to use to borrow code and re-use it for another scenario
+		wizard.heal.call(archer) // borrows heal function from wizard and allows archer to use it
+
+bind()
+	- allows us to call function later on with certain context
+
+
+------------------------------------------------------------------------------------------------------
+
+JS DATA STRUCTURES
+	arrays
+		- structure -> index : value
+		- you can put any data type into arrays and even combine different data types in same array
+		- you can have nested arrays -> array[1][1][0]
+		- make sure when editing a list you assign a variable to the array so updates can be updated
+		- array.shift() -> removes first element
+		- array.pop() -> removes last element
+		- array.push() -> adds element
+		- array.concat() -> this function creates a brand new array so be mindful of storing that new 	data 
+
+	map, filter, reduce
+		array.map -> same as forEach loop but it must return an output and you dont need to create another array to push elements into.
+
+			let mapArray = array.map((num) => return num*2) //elements are stored in mapArray
+
+		array.filter -> return a filtered output based on a true/false condition
+
+			let filterArray = array.filter((num) => return num > 10)
+
+		array.reduce -> combination of map and filter
+
+------------------------------------------------------------------------------------------------------
+
+JS OBJECTS
+	- objects have similar structure as arrays -> property : value
+	- curly braces surround properties and values
+	- objects can contain data types, lists, and even functions
+	- you can create an empty object
+
+DESTRUCTURING
+	- new syntax for grabbing object properties
+
+	const obj = {
+		player:'bobby',
+		experience: 100,
+		wizardLevel: false
+	}
+
+	let {player:objPlayer, experience:objExperience, wizardLevel:objWizardLevel} = obj
+	let {player, experience, wizardLevel} = obj
+
+PASS BY REFERNCE VS PASS BY VALUE
+	- variables are pass by value
+	- objects are pass by reference //arrays and objects 
+------------------------------------------------------------------------------------------------------
+
+LOOPS
+	for(var i=0; i < array; i++) {
+	}
+
+
+	array.forEach(function(i) {
+	})
+
+ADVANCED LOOPS
+	for of -> loops arrays and strings 
+		for(item of groceryList) {
+		console.log(item);
+		}
+
+	for in -> loops/enumerates objects
+		for(user in userObj) {
+		console.log(user)
+		}
+------------------------------------------------------------------------------------------------------
+
+TEMPLATE STRINGS
+	`Hello ${name} you are ${race} and you are a ${gender}`
+
+------------------------------------------------------------------------------------------------------
+
+JS7(2016)
+	- .includes() will check an array for the data you give
+		array.includes("apples") //returns a boolean
+
+	- multiply numbers to the (n)power
+		let cube = (x) => x**3;
+		cube(3) = 27
+
+------------------------------------------------------------------------------------------------------
+
+JS8
+	- you can add spacing in strings. Give a number for the total spaces.
+		padStart() 
+		padEnd()
+
+	- you can end a parameter with a comma now
+		const func = (1,2,3,4,) => 
+
+	-  you can loop through an object like an array and grab values or the entire entry
+		let obj = {
+			username:"1",
+			username2:"2",
+			username3:"3"
+		}
+		Object.values(obj).forEach(value => console.log(value)) // returns 1,2,3
+		Object.entries(obj).forEach(entry => console.log(entry)) // returns property and value
+
+Async Await
+	- JS is a single threaded programming language meaning one thing gets executed at a time on the 	call stack
+	- To overcome waiting on long running tasks async was created to allow faster tasks to complete 	before starting a longer task
+
+	async function playerStart() {
+		const firstMove = await movePlayer(100,'Left');
+		await movePlayer(400,'Right');
+		await movePlayer(300, 'Left');
+	}
+
+
+PROMISE
+	- upgrade from callbacks that let you chain actions
+	- const promise = new Promise((resolve, reject) => {
+		if(true) {
+		resolve('Hello');
+		} else {
+		reject('Bye');
+		}
+	})
+
+		promise.then(result => result + '!').then(result2 => result2 + '?').then
+
+jS RUNTIME ENVIRONMENT
+	-> call stack -> web api -> callback queue -> event loop -> call stack
+	- synchronous = you call someone and have to wait till the answer before doing something
+	- asynchronous = you text someone and do other stuff till they text you back
+
+------------------------------------------------------------------------------------------------------
+
+JS10
+
+	- .flat() -> reduces a nested array to a single array
+	- .flatMap() -> same thing a flat() but you can attached elements to each index
+	- .trimStart
+	- .trimEnd
+	- Object.fromEntries -> convert an array of items into and object
+		[['user1', 25], ['user2', 32], [user3, 55]]
+		Object.fromEntries(userProfile)
+
+	- try catch error handling 
+
+------------------------------------------------------------------------------------------------------
+
+
+
